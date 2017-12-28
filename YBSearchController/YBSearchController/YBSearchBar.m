@@ -25,8 +25,13 @@
 @implementation YBSearchBar
 
 -(instancetype)initWithFrame:(CGRect)frame {
-       frame = CGRectMake(0, 100, screenWidth,44.0);
+    
+    if (CGRectEqualToRect(frame, CGRectZero)) {
+        frame = CGRectMake(0, 0, screenWidth,44.0);
+    }
+    
     if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor grayColor];
         [self addSubview:self.backgroundImageView];
         [self addSubview:self.textField];
         [self addSubview:self.cancelButton];
@@ -34,29 +39,16 @@
     return self;
 }
 
--(void)dealloc {
-    [self removeObserver:self forKeyPath:@"editing"];
-}
-
 #pragma mark - getter
 
--(UIImageView *)backgroundImageView {
-    if (!_backgroundImageView) {
+-(YBTextField *)textField {
+    if (!_textField) {
         CGFloat offsetX = 10;
         CGFloat offsetY = 8;
         CGFloat width = self.frame.size.width - offsetX * 2.0;
         CGFloat height = self.frame.size.height - offsetY * 2.0;
         CGRect frame = CGRectMake(offsetX, offsetY, width, height);
-        _backgroundImageView.userInteractionEnabled = YES;
-        _backgroundImageView = [[UIImageView alloc] initWithFrame:frame];
-//        _backgroundImageView.image = [UIImage imageNamed:@"searchbar_textfield_widget"];
-    }
-    return _backgroundImageView;
-}
-
--(YBTextField *)textField {
-    if (!_textField) {
-        _textField = [[YBTextField alloc] initWithFrame:self.backgroundImageView.frame];
+        _textField = [[YBTextField alloc] initWithFrame:frame];
         _textField.borderStyle = UITextBorderStyleRoundedRect;
         _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _textField.font = [UIFont systemFontOfSize:14.0];
@@ -83,17 +75,44 @@
     }
     return _cancelButton;
 }
+
+-(UIImageView *)backgroundImageView {
+    if (!_backgroundImageView) {
+        _backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
+        _backgroundImageView.backgroundColor = [UIColor orangeColor];
+    }
+    return _backgroundImageView;
+}
+
 #pragma mark - UITextFieldDelagate
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    
     self.cancelButton.hidden = NO;
-    CGRect frame = self.backgroundImageView.frame;
+    
+    CGRect frame = self.textField.frame;
+    
     frame.size.width = frame.size.width - self.cancelButton.frame.size.width - 8.0;
-    [self.textField setFrame:frame];
+    
+    UIViewController *vc = [self viewController];
+
+    BOOL shouldBegin = YES;
     
     if ([self.delegate respondsToSelector:@selector(searchFieldShouldBeginEditing:)]) {
-        return [self.delegate searchFieldShouldBeginEditing:textField];
+        shouldBegin = [self.delegate searchFieldShouldBeginEditing:textField];
     }
+    
+    CGRect bgViewFrame = self.backgroundImageView.frame;
+    CGFloat offsetY = CGRectGetMinY(vc.navigationController.navigationBar.frame);
+    
+    if(offsetY <= 0) {
+        bgViewFrame.size.height += [UIApplication sharedApplication].statusBarFrame.size.height;
+        bgViewFrame.origin.y -= [UIApplication sharedApplication].statusBarFrame.size.height;
+    }
+    
+    self.backgroundImageView.frame = bgViewFrame;
+    [self.textField setFrame:frame];
+    
     NSLog(@"%s",__func__);
     return YES;
 }
@@ -106,11 +125,8 @@
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    
     self.cancelButton.hidden = YES;
     [self resetSize];
-    [self.textField setFrame:self.backgroundImageView.frame];
-    
     if ([self.delegate respondsToSelector:@selector(searchFieldShouldEndEditing:)]) {
         return [self.delegate searchFieldShouldEndEditing:textField];
     }
@@ -152,10 +168,23 @@
 -(void)resetSize {
     CGFloat offsetX = 10;
     CGFloat offsetY = 8;
-    CGFloat width = self.frame.size.width - offsetX * 2.0;
-    CGFloat height = self.frame.size.height - offsetY * 2.0;
+    CGFloat width  = self.bounds.size.width  - offsetX * 2.0;
+    CGFloat height = self.bounds.size.height - offsetY * 2.0;
     CGRect frame = CGRectMake(offsetX, offsetY, width, height);
-    self.backgroundImageView.frame = frame;
+    
+    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
+        self.textField.frame = frame;
+        self.backgroundImageView.frame = self.bounds;
+    } completion:nil];
 }
 
+- (UIViewController *)viewController {
+    for (UIView* next = [self superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
+}
 @end

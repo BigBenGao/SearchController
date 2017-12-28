@@ -17,6 +17,7 @@
 		3E1B87361FF328C100EE52AF /* YBSearchControllerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1B87351FF328C100EE52AF /* YBSearchControllerUITests.m */; };
 		3E1B87451FF328E800EE52AF /* YBSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1B87441FF328E800EE52AF /* YBSearchBar.m */; };
 		3E1B87481FF32E3C00EE52AF /* YBTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1B87471FF32E3C00EE52AF /* YBTextField.m */; };
+		3E1B87A91FF393A800EE52AF /* YBSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1B87A81FF393A800EE52AF /* YBSearchController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		3E1B87441FF328E800EE52AF /* YBSearchBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBSearchBar.m; sourceTree = "<group>"; };
 		3E1B87461FF32E3C00EE52AF /* YBTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBTextField.h; sourceTree = "<group>"; };
 		3E1B87471FF32E3C00EE52AF /* YBTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBTextField.m; sourceTree = "<group>"; };
+		3E1B87A71FF393A800EE52AF /* YBSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBSearchController.h; sourceTree = "<group>"; };
+		3E1B87A81FF393A800EE52AF /* YBSearchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBSearchController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 				3E1B87441FF328E800EE52AF /* YBSearchBar.m */,
 				3E1B87461FF32E3C00EE52AF /* YBTextField.h */,
 				3E1B87471FF32E3C00EE52AF /* YBTextField.m */,
+				3E1B87A71FF393A800EE52AF /* YBSearchController.h */,
+				3E1B87A81FF393A800EE52AF /* YBSearchController.m */,
 				3E1B87171FF328C100EE52AF /* Main.storyboard */,
 				3E1B871A1FF328C100EE52AF /* Assets.xcassets */,
 				3E1B871C1FF328C100EE52AF /* LaunchScreen.storyboard */,
@@ -277,6 +282,7 @@
 			files = (
 				3E1B87161FF328C100EE52AF /* ViewController.m in Sources */,
 				3E1B87211FF328C100EE52AF /* main.m in Sources */,
+				3E1B87A91FF393A800EE52AF /* YBSearchController.m in Sources */,
 				3E1B87451FF328E800EE52AF /* YBSearchBar.m in Sources */,
 				3E1B87481FF32E3C00EE52AF /* YBTextField.m in Sources */,
 				3E1B87131FF328C100EE52AF /* AppDelegate.m in Sources */,

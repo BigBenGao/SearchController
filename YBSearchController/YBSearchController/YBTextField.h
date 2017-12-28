@@ -10,4 +10,6 @@
 
 @interface YBTextField : UITextField
 
+@property(nonatomic,strong) UIImageView *backgroundImageView;
+
 @end

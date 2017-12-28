@@ -12,6 +12,9 @@
 
 -(instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+
+        [self addSubview:self.backgroundImageView];
+        
         UIImage *imageIcon = [UIImage imageNamed:@"SearchContactsBarIcon"];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:imageIcon];
         self.leftView = imageView;
@@ -27,9 +30,26 @@
 
 -(void)layoutSubviews {
     [super layoutSubviews];
-
+    
     for (UIView *view in self.subviews) {
+        
+        NSString *className = NSStringFromClass([view class]);
+        
+        if ([className isEqualToString:@"_UITextFieldRoundedRectBackgroundViewNeue"] ||
+            [className isEqualToString:@"UIButton"]) {
+            continue;
+        }
+        
         if ([view isMemberOfClass:[UIImageView class]]) {
+            
+            if (self.backgroundImageView == view) {
+                CGRect frame = self.frame;
+                frame.origin.x = 0;
+                frame.origin.y = 0;
+                self.backgroundImageView.frame = frame;
+                continue;
+            }
+            
             CGFloat offSetX = 8.0;
             CGFloat offSetY = (self.frame.size.height - 13.0) / 2.0;
             if (!self.isEditing) {
@@ -37,11 +57,6 @@
             }
             CGRect frame = CGRectMake(offSetX,offSetY, 13, 13);
             view.frame = frame;
-            continue;
-        }
-        
-        NSString *className = NSStringFromClass([view class]);
-        if ([className isEqualToString:@"_UITextFieldRoundedRectBackgroundViewNeue"] || [className isEqualToString:@"UIButton"]) {
             continue;
         }
         
@@ -53,6 +68,17 @@
         frame.origin.x = offSetX;
         view.frame = frame;
     }
+}
+
+#pragma mark - components
+
+-(UIImageView *)backgroundImageView {
+    if (!_backgroundImageView) {
+        _backgroundImageView.userInteractionEnabled = NO;
+        _backgroundImageView = [[UIImageView alloc] initWithFrame:self.frame];
+        _backgroundImageView.image = [UIImage imageNamed:@"searchbar_textfield_widget"];
+    }
+    return _backgroundImageView;
 }
 
 @end
