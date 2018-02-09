@@ -18,6 +18,8 @@
 		3E1B87451FF328E800EE52AF /* YBSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1B87441FF328E800EE52AF /* YBSearchBar.m */; };
 		3E1B87481FF32E3C00EE52AF /* YBTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1B87471FF32E3C00EE52AF /* YBTextField.m */; };
 		3E1B87A91FF393A800EE52AF /* YBSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1B87A81FF393A800EE52AF /* YBSearchController.m */; };
+		3E501EB3202C1A8200B3A155 /* searchControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E501EB2202C1A8200B3A155 /* searchControllerView.m */; };
+		3E92F126202C270E003DAC3E /* CustomTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E92F125202C270E003DAC3E /* CustomTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,10 @@
 		3E1B87471FF32E3C00EE52AF /* YBTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBTextField.m; sourceTree = "<group>"; };
 		3E1B87A71FF393A800EE52AF /* YBSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBSearchController.h; sourceTree = "<group>"; };
 		3E1B87A81FF393A800EE52AF /* YBSearchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBSearchController.m; sourceTree = "<group>"; };
+		3E501EB1202C1A8200B3A155 /* searchControllerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = searchControllerView.h; sourceTree = "<group>"; };
+		3E501EB2202C1A8200B3A155 /* searchControllerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = searchControllerView.m; sourceTree = "<group>"; };
+		3E92F124202C270E003DAC3E /* CustomTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTableViewController.h; sourceTree = "<group>"; };
+		3E92F125202C270E003DAC3E /* CustomTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +124,10 @@
 				3E1B87441FF328E800EE52AF /* YBSearchBar.m */,
 				3E1B87461FF32E3C00EE52AF /* YBTextField.h */,
 				3E1B87471FF32E3C00EE52AF /* YBTextField.m */,
+				3E92F124202C270E003DAC3E /* CustomTableViewController.h */,
+				3E92F125202C270E003DAC3E /* CustomTableViewController.m */,
+				3E501EB1202C1A8200B3A155 /* searchControllerView.h */,
+				3E501EB2202C1A8200B3A155 /* searchControllerView.m */,
 				3E1B87A71FF393A800EE52AF /* YBSearchController.h */,
 				3E1B87A81FF393A800EE52AF /* YBSearchController.m */,
 				3E1B87171FF328C100EE52AF /* Main.storyboard */,
@@ -209,7 +219,7 @@
 		3E1B87061FF328C100EE52AF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Gao;
 				TargetAttributes = {
 					3E1B870D1FF328C100EE52AF = {
@@ -280,11 +290,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E92F126202C270E003DAC3E /* CustomTableViewController.m in Sources */,
 				3E1B87161FF328C100EE52AF /* ViewController.m in Sources */,
 				3E1B87211FF328C100EE52AF /* main.m in Sources */,
 				3E1B87A91FF393A800EE52AF /* YBSearchController.m in Sources */,
 				3E1B87451FF328E800EE52AF /* YBSearchBar.m in Sources */,
 				3E1B87481FF32E3C00EE52AF /* YBTextField.m in Sources */,
+				3E501EB3202C1A8200B3A155 /* searchControllerView.m in Sources */,
 				3E1B87131FF328C100EE52AF /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +366,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -361,6 +374,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -388,7 +402,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -409,6 +423,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -416,6 +431,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -437,7 +453,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -448,6 +464,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UA87457RN3;
 				INFOPLIST_FILE = YBSearchController/Info.plist;
@@ -462,6 +479,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UA87457RN3;
 				INFOPLIST_FILE = YBSearchController/Info.plist;
@@ -476,6 +494,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UA87457RN3;
 				INFOPLIST_FILE = YBSearchControllerTests/Info.plist;
@@ -491,6 +510,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UA87457RN3;
 				INFOPLIST_FILE = YBSearchControllerTests/Info.plist;
@@ -505,6 +525,7 @@
 		3E1B87411FF328C100EE52AF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UA87457RN3;
 				INFOPLIST_FILE = YBSearchControllerUITests/Info.plist;
@@ -519,6 +540,7 @@
 		3E1B87421FF328C100EE52AF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UA87457RN3;
 				INFOPLIST_FILE = YBSearchControllerUITests/Info.plist;

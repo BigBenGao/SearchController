@@ -11,8 +11,11 @@
 @class YBSearchBar;
 
 @protocol SearchResultsUpdating <NSObject>
+
 @required
+
 - (void)updateSearchResultsForController:(UISearchController * _Nonnull)searchController;
+
 @end
 
 @interface YBSearchController : UIViewController
@@ -21,8 +24,14 @@
 
 @property(nonatomic,strong) YBSearchBar * _Nonnull searchBar;
 
+@property (nonatomic, assign, getter = isActive) BOOL active;
+
 @property (nullable, nonatomic, weak) id <UISearchResultsUpdating> searchResultsUpdater;
 
+@property (nonatomic, strong) UIViewController *searchResultsController;
+
 @property (nonatomic, assign) BOOL hidesNavigationBarDuringPresentation;
+
+@property (nonatomic, assign) BOOL dimsBackgroundDuringPresentation;
 
 @end

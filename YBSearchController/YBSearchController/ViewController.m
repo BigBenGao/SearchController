@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "YBSearchController.h"
 #import "YBSearchBar.h"
+#import "CustomTableViewController.h"
 
 @interface ViewController () <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchResultsUpdating,UISearchControllerDelegate>
 
@@ -32,6 +33,7 @@ static NSString *cellIdentifity = @"reuseCell";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
     self.navigationController.navigationBar.translucent = NO;
+    
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifity];
     tableView.delegate = self;
@@ -39,27 +41,43 @@ static NSString *cellIdentifity = @"reuseCell";
     self.tableView = tableView;
     [self.view addSubview:tableView];
     
-    YBSearchController *searchController = [[YBSearchController alloc] initWithSearchResultsController:self];
+    YBSearchController *searchController = [[YBSearchController alloc] initWithSearchResultsController:nil];
+    searchController.searchResultsUpdater = self;
+    searchController.hidesNavigationBarDuringPresentation = YES;
+    searchController.searchBar.delegate = self;
+    searchController.dimsBackgroundDuringPresentation = YES;
     self.searchController = searchController;
     self.tableView.tableHeaderView = searchController.searchBar;
-        
+    
+
+//    CustomTableViewController *vc = [[CustomTableViewController alloc] init];
 //    self.searchVc = [[UISearchController alloc] initWithSearchResultsController:nil];
 //    self.searchVc.searchBar.delegate = self;
-//    self.searchVc.hidesNavigationBarDuringPresentation = NO;
+//    self.searchVc.hidesNavigationBarDuringPresentation = YES;
+//    self.searchVc.dimsBackgroundDuringPresentation = YES;
 //    self.searchVc.searchResultsUpdater = self;
 //    self.searchVc.delegate = self;
 //    self.tableView.tableHeaderView = self.searchVc.searchBar;
-    
+//    self.searchVc.searchBar.frame = CGRectMake(0, 100, self.view.frame.size.width, 100);
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 20;
 }
 
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifity];
-    cell.textLabel.text = [NSString stringWithFormat:@"%ld",indexPath.row];
+    if (!self.searchVc.isActive) {
+        cell.textLabel.text = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+    } else {
+        cell.textLabel.text = [NSString stringWithFormat:@"activite = %@",self.searchVc.searchBar.text];
+    }
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"select");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,14 +86,21 @@ static NSString *cellIdentifity = @"reuseCell";
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    NSLog(@"text = %@",searchText);
+    NSLog(@"textDidChange = %@",searchText);
 }
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    NSLog(@"text = %@",searchController.searchBar.text);
+    NSLog(@"updateSearchResultsForSearchController = %@",searchController.searchBar.text);
+    [self.tableView reloadData];
+}
+
+- (void)updateSearchResultsForController:(UISearchController *)searchController {
+    NSLog(@"updateSearchResultsForController text = %@",searchController.searchBar.text);
+    [self.tableView reloadData];
 }
 
 -(void)willPresentSearchController:(UISearchController *)searchController {
     NSLog(@"ASD");
 }
+
 @end

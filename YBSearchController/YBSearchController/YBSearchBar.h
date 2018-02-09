@@ -18,16 +18,20 @@
 
 - (BOOL)searchFieldShouldEndEditing:(UITextField *)textField;
 
-- (BOOL)searchFieldDidEndEditing:(UITextField *)textField;
+- (void)searchFieldDidEndEditing:(UITextField *)textField;
 
 - (BOOL)searchFieldShouldReturn:(UITextField *)textField;
 
-- (BOOL)searchFieldTextDidChanged:(UITextField *)textField;
+- (void)searchFieldTextDidChanged:(UITextField *)textField;
 
 @end
 
 @interface YBSearchBar : UIView
 
 @property(nonatomic,weak) id <YBSearchBarDelegate> delegate;
+
+@property(nonatomic,copy) NSString *text;
+
+@property(nonatomic,copy) NSString *placeholder;
 
 @end
