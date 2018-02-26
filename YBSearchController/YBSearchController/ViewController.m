@@ -46,19 +46,18 @@ static NSString *cellIdentifity = @"reuseCell";
     searchController.hidesNavigationBarDuringPresentation = YES;
     searchController.searchBar.delegate = self;
     searchController.dimsBackgroundDuringPresentation = YES;
+    searchController.searchBar.showsCancelButton = YES;
     self.searchController = searchController;
     self.tableView.tableHeaderView = searchController.searchBar;
     
-
 //    CustomTableViewController *vc = [[CustomTableViewController alloc] init];
 //    self.searchVc = [[UISearchController alloc] initWithSearchResultsController:nil];
 //    self.searchVc.searchBar.delegate = self;
 //    self.searchVc.hidesNavigationBarDuringPresentation = YES;
-//    self.searchVc.dimsBackgroundDuringPresentation = YES;
+//    self.searchVc.dimsBackgroundDuringPresentation = NO;
 //    self.searchVc.searchResultsUpdater = self;
 //    self.searchVc.delegate = self;
 //    self.tableView.tableHeaderView = self.searchVc.searchBar;
-//    self.searchVc.searchBar.frame = CGRectMake(0, 100, self.view.frame.size.width, 100);
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

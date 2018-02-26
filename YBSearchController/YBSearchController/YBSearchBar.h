@@ -32,6 +32,8 @@
 
 @property(nonatomic,copy) NSString *text;
 
-@property(nonatomic,copy) NSString *placeholder;
+@property(nonatomic,copy) NSString *placeholder;         // default is "Search"
+
+@property(nonatomic,assign) BOOL  showsCancelButton;     // default is NO
 
 @end

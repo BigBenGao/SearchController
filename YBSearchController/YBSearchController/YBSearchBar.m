@@ -31,6 +31,7 @@
     }
     
     if (self = [super initWithFrame:frame]) {
+        _showsCancelButton = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelSearch) name:@"YBSearchControllerWillDismiss" object:nil];
         self.backgroundColor = [UIColor grayColor];
         self.placeholder = @"搜索";
@@ -50,11 +51,14 @@
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     
-    self.cancelButton.hidden = NO;
+    [self.cancelButton setHidden:NO];
     
-    CGRect frame = self.textField.frame;
-    
-    frame.size.width = frame.size.width - self.cancelButton.frame.size.width - 8.0;
+    if (!self.showsCancelButton) {
+        CGFloat cancelButtonWidth = CGRectGetWidth(self.cancelButton.frame);
+        CGRect frame = self.textField.frame;
+        frame.size.width = frame.size.width - cancelButtonWidth - 8.0;
+        [self.textField setFrame:frame];
+    }
     
     UIViewController *vc = [self viewController];
 
@@ -63,6 +67,7 @@
     }
     
     CGRect bgViewFrame = self.backgroundImageView.frame;
+    
     CGFloat offsetY = CGRectGetMinY(vc.navigationController.navigationBar.frame);
     
     if(offsetY <= 0) {
@@ -71,7 +76,6 @@
     }
     
     self.backgroundImageView.frame = bgViewFrame;
-    [self.textField setFrame:frame];
     
     NSLog(@"%s",__func__);
     return YES;
@@ -85,8 +89,7 @@
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    self.cancelButton.hidden = YES;
-    [self resetSize];
+    [self reset];
     if ([self.delegate respondsToSelector:@selector(searchFieldShouldEndEditing:)]) {
         return [self.delegate searchFieldShouldEndEditing:textField];
     }
@@ -126,12 +129,21 @@
 
 #pragma mark - Other
 
--(void)resetSize {
+-(void)reset {
     CGFloat offsetX = 10;
     CGFloat offsetY = 8;
     CGFloat width  = self.bounds.size.width  - offsetX * 2.0;
     CGFloat height = self.bounds.size.height - offsetY * 2.0;
     CGRect frame = CGRectMake(offsetX, offsetY, width, height);
+    
+    if (self.showsCancelButton) {
+        CGFloat leftMargin = 10.0;
+        width = width - leftMargin - CGRectGetWidth(self.cancelButton.frame);
+        frame.size.width = width;
+        _cancelButton.hidden = NO;
+    } else {
+        _cancelButton.hidden = YES;
+    }
     
     [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
         self.textField.frame = frame;
@@ -147,6 +159,11 @@
         }
     }
     return nil;
+}
+
+-(void)setShowsCancelButton:(BOOL)showsCancelButton {
+    _showsCancelButton = showsCancelButton;
+    [self reset];
 }
 
 -(void)setPlaceholder:(NSString *)placeholder {
@@ -178,9 +195,9 @@
         [_cancelButton setTitleColor:[UIColor colorWithRed: 6 / 255.0 green: 191 / 255.0 blue: 4 / 255.0 alpha:1.0] forState:UIControlStateNormal];
         [_cancelButton setTitle:@"取消" forState:UIControlStateNormal];
         [_cancelButton addTarget:self action:@selector(cancelSearch) forControlEvents:UIControlEventTouchUpInside];
-        [_cancelButton setHidden:YES];
         [_cancelButton.titleLabel setFont:[UIFont systemFontOfSize:17.0]];
         [_cancelButton sizeToFit];
+        [_cancelButton setHidden:YES];
         CGRect frame = _cancelButton.frame;
         frame.size.height = self.frame.size.height;
         frame.origin.x = self.frame.size.width - frame.size.width - 8.0;
